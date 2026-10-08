@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maica Labine | My Personal Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cocoa: #6B4F3A;
+            --light-cream: #F8F3E8;
+            --earth-brown: #8A6A4A;
+            --sand: #DCC9A9;
+            --leaf-green: #7A8F62;
+            --dark-leaf: #61754D;
+            --soft-brown: #A88F78;
+            --white: #FFFDF7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--light-cream);
+            color: var(--cocoa);
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .quote,
+        .logo,
+        button,
+        a {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+        }
+
+        #cover {
+            min-height: 100vh;
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 60px 20px;
+            background: radial-gradient(circle at top left, rgba(122, 143, 98, 0.10), transparent 35%), var(--light-cream);
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #cover.active-section {
+            display: flex;
+        }
+
+        .cover-title {
+            font-size: 48px;
+            font-weight: 500;
+            color: var(--cocoa);
+            text-align: center;
+            margin-bottom: 55px;
+            letter-spacing: 0.5px;
+            animation: fadeDown 0.8s ease;
+        }
+
+        .cover-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 3px;
+            background: var(--leaf-green);
+            margin: 18px auto 0;
+            border-radius: 10px;
+        }
+
+        .cover-grid {
+            width: 90%;
+            max-width: 950px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 38px 50px;
+            animation: fadeUp 0.9s ease;
+            padding-bottom: 40px;
+        }
+
+        .cover-card {
+            position: relative;
+            min-height: 175px;
+            background: var(--white);
+            border: 1px solid rgba(138, 106, 74, 0.16);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(107, 79, 58, 0.10);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .cover-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--leaf-green);
+            box-shadow: 0 20px 45px rgba(107, 79, 58, 0.16);
+        }
+
+        .cover-card span {
+            font-size: 31px;
+            font-weight: 500;
+            color: var(--cocoa);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cover-card:hover span {
+            color: var(--leaf-green);
+            transform: scale(1.04);
+        }
+
+        .cover-card:last-child {
+            grid-column: 1 / 3;
+            width: 50%;
+            justify-self: center;
+        }
+
+        section {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            padding: 100px 20px 40px;
+        }
+
+        section.active-section {
+            display: flex;
+        }
+
+        section.active-section > .section-container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .back-cover {
+            display: block;
+            width: 120px;
+            padding: 11px 20px;
+            margin: 0 0 30px 0;
+            border-radius: 30px;
+            background: var(--leaf-green);
+            color: var(--white);
+            border: 1px solid var(--leaf-green);
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-cover:hover {
+            background: var(--dark-leaf);
+            border-color: var(--dark-leaf);
+            transform: translateY(-3px);
+        }
+
+        #profile {
+            background: var(--white);
+        }
+
+        .profile-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 70px;
+            padding: 20px 30px 50px;
+            flex-wrap: wrap;
+        }
+
+        .profile-text {
+            flex: 1;
+            max-width: 620px;
+        }
+
+        .profile-text h3 {
+            font-size: 38px;
+            margin-bottom: 25px;
+            color: var(--cocoa);
+            font-weight: 600;
+        }
+
+        .profile-text h3 span {
+            color: var(--leaf-green);
+        }
+
+        .profile-description {
+            color: var(--earth-brown);
+            font-size: 16px;
+            line-height: 1.9;
+            margin-top: 10px;
+        }
+
+        .profile-picture-container {
+            flex: 0 0 340px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-picture {
+            width: 300px;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 25px;
+            border: 5px solid var(--white);
+            box-shadow: 0 15px 35px rgba(107, 79, 58, 0.16);
+            transition: transform 0.35s ease;
+        }
+
+        .profile-picture:hover {
+            transform: translateY(-7px);
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--cocoa);
+        }
+
+        .section-heading span {
+            display: block;
+            margin-top: 5px;
+            color: var(--leaf-green);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        #quote {
+            background: var(--light-cream);
+        }
+
+        .home-content {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .small-title {
+            color: var(--leaf-green);
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .quote-box {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid rgba(138, 106, 74, 0.16);
+            box-shadow: 0 15px 45px rgba(107, 79, 58, 0.14);
+            transition: 0.35s ease;
+        }
+
+        .quote-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .quote {
+            font-size: 28px;
+            line-height: 1.6;
+            color: var(--cocoa);
+            font-weight: 400;
+        }
+
+        .author {
+            margin-top: 22px;
+            font-size: 16px;
+            color: var(--leaf-green);
+            font-weight: 600;
+        }
+
+        #quizzes,
+        #exams {
+            background: var(--light-cream);
+        }
+
+        #activities {
+            background: var(--white);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+            padding: 20px 3px 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(138, 106, 74, 0.14);
+            box-shadow: 0 10px 30px rgba(107, 79, 58, 0.09);
+            transition: transform 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--leaf-green);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            color: var(--cocoa);
+            margin-bottom: 8px;
+        }
+
+        .card .subject {
+            font-size: 14px;
+            color: var(--leaf-green);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--earth-brown);
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 13px;
+            color: var(--soft-brown);
+            margin-bottom: 20px;
+        }
+
+        .view-button {
+            display: inline-block;
+            padding: 11px 24px;
+            border-radius: 25px;
+            background: var(--leaf-green);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid var(--leaf-green);
+            transition: 0.3s ease;
+            text-align: center;
+        }
+
+        .view-button:hover {
+            background: var(--dark-leaf);
+            border-color: var(--dark-leaf);
+            transform: translateY(-3px);
+        }
+
+        .add-card {
+            border: 2px dashed var(--sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            background: rgba(255, 253, 247, 0.55);
+        }
+
+        .add-card:hover {
+            border-color: var(--leaf-green);
+            background: var(--white);
+        }
+
+        .add-content {
+            text-align: center;
+        }
+
+        .add-content .plus {
+            font-size: 40px;
+            color: var(--leaf-green);
+            transition: 0.3s ease;
+        }
+
+        .add-card:hover .plus {
+            transform: rotate(90deg);
+        }
+
+        .add-content p {
+            margin-top: 5px;
+            color: var(--earth-brown);
+            font-size: 15px;
+        }
+
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .quiz-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .quiz-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .quiz-modal-image-container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .quiz-modal-image-container::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .quiz-modal-image-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        .quiz-modal-image {
+            max-width: 95vw;
+            max-height: 95vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .quiz-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+            z-index: 10;
+        }
+
+        .quiz-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: rotate(90deg);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cover-title {
+                font-size: 36px;
+            }
+
+            .cover-grid {
+                grid-template-columns: 1fr;
+                width: 95%;
+                gap: 20px;
+            }
+
+            .cover-card:last-child {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .cover-card span {
+                font-size: 25px;
+            }
+
+            .profile-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 10px 40px;
+            }
+
+            .profile-text h3 {
+                font-size: 30px;
+            }
+
+            .profile-picture-container {
+                flex: none;
+                width: 100%;
+            }
+
+            .profile-picture {
+                width: 260px;
+                height: 320px;
+            }
+
+            .quote-box {
+                padding: 30px 20px;
+            }
+
+            .quote {
+                font-size: 22px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="cover" class="active-section">
+
+        <h1 class="cover-title">Welcome to My Portfolio</h1>
+
+        <div class="cover-grid">
+
+            <div class="cover-card" onclick="showSection('profile')">
+                <span>Profile</span>
+            </div>
+
+            <div class="cover-card" onclick="showSection('quote')">
+                <span>Quote</span>
+            </div>
+
+            <div class="cover-card" onclick="showSection('quizzes')">
+                <span>My Quizzes</span>
+            </div>
+
+            <div class="cover-card" onclick="showSection('activities')">
+                <span>My Activities</span>
+            </div>
+
+            <div class="cover-card" onclick="showSection('exams')">
+                <span>My Exam</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="profile">
+
+        <div class="section-container">
+
+            <button class="back-cover" onclick="showSection('cover')" type="button">
+                Back
+            </button>
+
+            <div class="section-heading">
+                <span>Get to know me</span>
+            </div>
+
+            <div class="profile-content">
+
+                <div class="profile-text">
+
+                    <h3>
+                        Hi, Hello! I Am <span>Maica Labine</span>
+                    </h3>
+
+                    <p class="profile-description">
+                        "Oh yeah, that's me in my old photo! I'm a BSCS-3B student at CVSU Silang— never thought I'd stick with this course, but ang layo ko na. I keep learning and growing through everything at school. I love simple things that make me happy and help me show my creativity."
+                    </p>
+
+                </div>
+
+                <div class="profile-picture-container">
+
+                    <img src="My Old Pic.jpg" alt="My Old Picture" class="profile-picture">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="quote">
+
+        <div class="home-content">
+
+            <button class="back-cover" onclick="showSection('cover')" type="button">
+                Back
+            </button>
+
+            <div class="small-title">
+                quote
+            </div>
+
+            <div class="quote-box">
+
+                <p class="quote">
+                    “I am not looking for a career; I am looking for a life. And life is a process of becoming, a combination of states we have to go through. Where people fail is that they wish to elect a state and remain in it.”
+                </p>
+
+                <p class="author">
+                    — Anaïs Nin
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="quizzes">
+
+        <div class="section-container">
+
+            <button class="back-cover" onclick="showSection('cover')" type="button">
+                Back
+            </button>
+
+            <div class="section-heading">
+                <h2>Quizzes</h2>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Quiz 1</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        Emerging Technologies
+                    </p>
+
+                    <div class="date">
+                        Date: August 25, 2026
+                    </div>
+
+                    <button type="button" class="view-button" onclick="openQuiz('quiz1.jfif')">
+                        View Quiz
+                    </button>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Quiz 2</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        Requirements Analysis & Unified Modeling Language
+                    </p>
+
+                    <div class="date">
+                        Date: October 5, 2026
+                    </div>
+
+                    <button type="button" class="view-button" onclick="openQuiz('quiz2.png')">
+                        View Quiz
+                    </button>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Quiz 3</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        SOLID Principles
+                    </p>
+
+                    <div class="date">
+                        Date: October 5, 2026
+                    </div>
+
+                    <button type="button" class="view-button" onclick="openQuiz('quiz3.png')">
+                        View Quiz
+                    </button>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Long Quiz</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        Emerging Technologies, Requirements Analysis, SOLID Principles & Design Patterns
+                    </p>
+
+                    <div class="date">
+                        Date: October 6, 2026
+                    </div>
+
+                    <button type="button" class="view-button" onclick="openQuiz('long quiz.png')">
+                        View Quiz
+                    </button>
+
+                </div>
+
+                <div class="card add-card">
+
+                    <div class="add-content">
+
+                        <div class="plus">+</div>
+
+                        <p>
+                            Add more quizzes
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="activities">
+
+        <div class="section-container">
+
+            <button class="back-cover" onclick="showSection('cover')" type="button">
+                Back
+            </button>
+
+            <div class="section-heading">
+                <h2>Activities</h2>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Activity 1</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        WALA PA
+                    </p>
+
+                    <div class="date">
+                        Date:
+                    </div>
+
+                    <a href="#" class="view-button">
+                        View Activity
+                    </a>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Activity 2</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        WALA PA
+                    </p>
+
+                    <div class="date">
+                        Date:
+                    </div>
+
+                    <a href="#" class="view-button">
+                        View Activity
+                    </a>
+
+                </div>
+
+                <div class="card add-card">
+
+                    <div class="add-content">
+
+                        <div class="plus">+</div>
+
+                        <p>
+                            Add more activities
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="exams">
+
+        <div class="section-container">
+
+            <button class="back-cover" onclick="showSection('cover')" type="button">
+                Back
+            </button>
+
+            <div class="section-heading">
+                <h2>Exams</h2>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Exam 1</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        Midterm Exam
+                    </p>
+
+                    <div class="date">
+                        Date: October 6, 2026
+                    </div>
+
+                    <button type="button" class="view-button" onclick="openQuiz('Midterm Exam.jpg')">
+                        View Exam
+                    </button>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Exam 2</h3>
+
+                    <div class="subject">
+                        DCIT-26
+                    </div>
+
+                    <p>
+                        Final Exam
+                    </p>
+
+                    <div class="date">
+                        Date:
+                    </div>
+
+                    <a href="#" class="view-button">
+                        View Exam
+                    </a>
+
+                </div>
+
+                <div class="card add-card">
+
+                    <div class="add-content">
+
+                        <div class="plus">+</div>
+
+                        <p>
+                            Add more exams
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="quiz-modal" id="quizModal" onclick="closeQuizOutside(event)">
+
+        <div class="quiz-modal-content">
+
+            <button type="button" class="quiz-close" onclick="closeQuiz()" aria-label="Close">
+                ×
+            </button>
+
+            <div class="quiz-modal-image-container">
+
+                <img id="quizModalImage" class="quiz-modal-image" src="" alt="Quiz or Exam" onclick="toggleZoom(event)">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        let currentZoom = 1;
+
+        const zoomStep = 0.15;
+        const maxZoom = 2.5;
+        const minZoom = 0.5;
+
+        function showSection(id) {
+            document.querySelectorAll("section").forEach(section => {
+                section.classList.remove("active-section");
+            });
+
+            const selected = document.getElementById(id);
+
+            if (selected) {
+                selected.classList.add("active-section");
+            }
+        }
+
+        function openQuiz(imagePath) {
+            currentZoom = 1;
+
+            const modal = document.getElementById("quizModal");
+            const modalImage = document.getElementById("quizModalImage");
+
+            modalImage.style.transform = "scale(1)";
+            modalImage.src = imagePath;
+
+            modal.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+            setTimeout(() => {
+                const container = document.querySelector(".quiz-modal-image-container");
+
+                if (container) {
+                    container.scrollTop = 0;
+                    container.scrollLeft = 0;
+                }
+            }, 50);
+        }
+
+        function closeQuiz() {
+            const modal = document.getElementById("quizModal");
+
+            modal.classList.remove("active");
+
+            document.getElementById("quizModalImage").src = "";
+
+            document.body.style.overflow = "";
+
+            currentZoom = 1;
+        }
+
+        function closeQuizOutside(event) {
+            if (event.target === document.getElementById("quizModal")) {
+                closeQuiz();
+            }
+        }
+
+        function zoomIn() {
+            if (currentZoom < maxZoom) {
+                currentZoom += zoomStep;
+                applyZoom();
+            }
+        }
+
+        function zoomOut() {
+            if (currentZoom > minZoom) {
+                currentZoom -= zoomStep;
+                applyZoom();
+            }
+        }
+
+        function toggleZoom(event) {
+            event.stopPropagation();
+
+            if (currentZoom === 1) {
+                currentZoom = 1.4;
+            } else {
+                currentZoom = 1;
+            }
+
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const img = document.getElementById("quizModalImage");
+
+            img.style.transform = `scale(${currentZoom})`;
+        }
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") {
+                closeQuiz();
+            }
+
+            if (e.key === "+" || e.key === "=") {
+                zoomIn();
+            }
+
+            if (e.key === "-") {
+                zoomOut();
+            }
+        });
+
+        showSection("cover");
+    </script>
+
+</body>
+
+</html>
+```
